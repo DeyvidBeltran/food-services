@@ -29,7 +29,7 @@ const crearRestaurante = async (req, res) => {
 const actualizarRestaurante = async (req, res) => {
   try {
     const { body } = req
-
+    const { ...body_message } = req.body
     //actualizar el restaurante
     const id_restaurante = body.id
     delete body.id
@@ -40,9 +40,11 @@ const actualizarRestaurante = async (req, res) => {
     })
 
     // Publicar en colas
-    publishRabbit(req.body)
+    publishRabbit(body_message)
 
-    res.send({ data: `Se actualizo la informacion del restaurante.` })
+    res.send({
+      data: `Se actualizo la informacion del restaurante. ${restaurante}`,
+    })
   } catch (error) {
     res.status(500)
     res.send({ error: `Algo ocurrio: ${error}` })
