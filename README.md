@@ -6,6 +6,9 @@ En primer lugar, construya los contenedores docker:
 ```bash
 docker compose up 
 ```
+
+Reiniciar manualmente unicamente el contenedor de pedidos si no funciona correctamente el consumer de Rabbit.
+
 ### BD
 
 Ejecutar los scripts que se encuentran en el archivo: scripts.sql
