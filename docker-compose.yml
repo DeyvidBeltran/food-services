@@ -1,0 +1,77 @@
+version: '3.8'
+services:
+  postgresdb:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+  
+  rabbitmq:
+    image: rabbitmq:3.9-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  pedidos:
+    build: ./pedidos
+    container_name: pedidos
+    depends_on:
+      - postgresdb
+      - rabbitmq
+    links:
+      - postgresdb
+      - rabbitmq
+    ports:
+      - 3000:3000
+
+  entregas:
+    build: ./entregas
+    container_name: entregas
+    depends_on:
+      - postgresdb
+      - rabbitmq
+    links:
+      - postgresdb
+      - rabbitmq
+    ports:
+      - 3001:3001
+
+  pagos:
+    build: ./pagos
+    container_name: pagos
+    depends_on:
+      - postgresdb
+      - rabbitmq
+    links:
+      - postgresdb
+      - rabbitmq
+    ports:
+      - 3002:3002
+
+  restaurantes:
+    build: ./restaurantes
+    container_name: restaurantes
+    depends_on:
+      - postgresdb
+      - rabbitmq
+    links:
+      - postgresdb
+      - rabbitmq
+    ports:
+      - 3003:3003
+
+  notificaciones:
+    build: ./notificaciones
+    container_name: notificaciones
+    depends_on:
+      - postgresdb
+      - rabbitmq
+    links:
+      - postgresdb
+      - rabbitmq
+    ports:
+      - 3004:3004
+  
