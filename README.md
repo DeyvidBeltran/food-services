@@ -7,7 +7,7 @@ En primer lugar, construya los contenedores docker:
 docker compose up 
 ```
 
-Reiniciar manualmente unicamente el contenedor de pedidos si no funciona correctamente el consumer de Rabbit.
+Reiniciar unicamente el contenedor de pedidos si no funciona correctamente el CONSUMER de Rabbit.
 
 ### BD
 
